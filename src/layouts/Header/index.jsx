@@ -10,7 +10,7 @@ const Header = () => {
           <div className="w-full">
             <span className="flex items-center">
               <img className="h-9" src="./images/logo.png" alt="logo" />
-              <h1 className="text-lg sm:text-2xl font-semibold">oviebarr</h1>
+              <h1 className="text-lg sm:text-2xl font-semibold">upibarr</h1>
             </span>
           </div>
 
@@ -18,7 +18,7 @@ const Header = () => {
             className={`flex sm:flex sm:flex-row p-4 sm:p-0 w-64 sm:w-full justify-between sm:justify-end items-start sm:items-center bg-secondary sm:bg-primary absolute sm:relative 
             top-16 sm:top-0 h-screen sm:h-16  sm:right-0 z-10 ${
               !open ? "right-0" : "-right-64 hidden"
-            } duration-300`}
+            } duration-300 z-20`}
           >
             <ul className="flex flex-col sm:flex-row gap-y-4 sm:gap-x-14 mt-14 sm:mt-0 sm:mr-8">
               <a href="/#">
