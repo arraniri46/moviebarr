@@ -6,38 +6,47 @@ import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/pagination";
 
-import { FreeMode, Pagination } from "swiper";
+import { Pagination } from "swiper";
 import { useState } from "react";
+
+import Skeleton from "../SkeletonList";
 
 const API_KEY = "dedeaec4a6b9b494f0a2b358a2bb2492";
 
-const MovieSlider = () => {
+const MovieSlider = ({ urlCategory }) => {
   const [dataMovie, setDataMovie] = useState([]);
 
-  const { data, isLoading } = useFetch(
-    `https://api.themoviedb.org/3/trending/movie/week?api_key=${API_KEY}`
-  );
+  const { data, isLoading } = useFetch(`${urlCategory}${API_KEY}`);
 
   if (data === undefined) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex flex-col sm:flex-row p-6 w-full">
+        <Skeleton />
+        <Skeleton />
+        <Skeleton />
+        <Skeleton />
+        <Skeleton />
+      </div>
+    );
   } else {
     return (
       <>
         <Swiper
           breakpoints={{
             320: {
-              slidesPerView: 1,
+              slidesPerView: 2,
             },
             640: {
               slidesPerView: 5,
             },
           }}
+          grabCursor={true}
           spaceBetween={30}
           freeMode={true}
           pagination={{
             clickable: true,
           }}
-          modules={[FreeMode, Pagination]}
+          modules={[Pagination]}
           className="w-full h-full sm:h-full"
         >
           {/* {isLoading ? <div>Loading...</div> : <div>data</div>} */}
