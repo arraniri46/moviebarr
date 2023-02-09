@@ -1,28 +1,46 @@
-const Card = ({ title, overview, release_date, poster, vote_avg }) => {
-  // const data = useFetch()
+import genres from "../../data/genres";
+
+const Card = ({
+  title,
+  overview,
+  release_date,
+  poster,
+  vote_avg,
+  genre_ids,
+}) => {
+  const genre = genres;
 
   return (
     <>
-      <div className="min-w-sm h-full rounded-lg shadow-lg">
+      <div className="w-full h-full rounded-lg shadow-lg">
         <a href="#">
           <img
-            className="w-full"
+            className="w-full h-full"
             src={`https://image.tmdb.org/t/p/original/${poster}`}
             alt="thumbnail"
+            loading="lazy"
           />
 
-          <div className="p-5 max-w-xs text-terniary">
-            <h5 className="mb-2 text-md sm:text-2xl font-bold tracking-tight truncate">
+          <div className="p-5 max-w-xs text-terniary bg-primary overflow-hidden shadow-2xl">
+            <h5 className="mb-2 text-xl sm:text-2xl font-semibold tracking-tight truncate text-secondary">
               {title}
             </h5>
-            <p className="mb-3 font-normal text-xs sm:text-md">
+            <p className="mb-3 font-normal text-xs sm:text-sm">
               {release_date}
             </p>
-            <p className="mb-3 font-normal text-xs sm:text-base ">
-              Action, Adventure, Comedy
-            </p>
-            <p className="mb-3 font-normal text-xs sm:text-base truncate">
-              {overview}
+            {genre_ids.length === 0 && (
+              <p className="text-secondary text-base">-</p>
+            )}
+
+            {...genre_ids
+              .map((el) => genre.filter(({ id, name }) => el === id))
+              .map((result) => (
+                <p className="mb-3 font-semibold text-xs inline truncate text-secondary">
+                  {result[0].name},<span>&nbsp;</span>
+                </p>
+              ))}
+            <p className="mb-3 font-normal text-sm truncate">
+              Overview: {overview}
             </p>
           </div>
         </a>
@@ -32,3 +50,12 @@ const Card = ({ title, overview, release_date, poster, vote_avg }) => {
 };
 
 export default Card;
+
+{
+  /* <p
+                key={index}
+                className="mb-3 font-normal text-xs sm:text-base inline"
+              >
+                {genre.name}
+              </p> */
+}

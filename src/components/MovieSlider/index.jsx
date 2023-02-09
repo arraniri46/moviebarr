@@ -5,8 +5,9 @@ import useFetch from "../../hooks/useFetch";
 import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/pagination";
+import "swiper/css/navigation";
 
-import { Pagination } from "swiper";
+import { Navigation, Pagination } from "swiper";
 import { useState } from "react";
 
 import Skeleton from "../SkeletonList";
@@ -26,18 +27,24 @@ const MovieSlider = ({ urlCategory }) => {
         <Skeleton />
         <Skeleton />
         <Skeleton />
+        <Skeleton />
       </div>
     );
   } else {
     return (
       <>
         <Swiper
+          navigation
           breakpoints={{
             320: {
-              slidesPerView: 2,
+              slidesPerView: 1,
             },
             640: {
-              slidesPerView: 5,
+              slidesPerView: 4,
+            },
+
+            1024: {
+              slidesPerView: 6,
             },
           }}
           grabCursor={true}
@@ -46,7 +53,7 @@ const MovieSlider = ({ urlCategory }) => {
           pagination={{
             clickable: true,
           }}
-          modules={[Pagination]}
+          modules={[Pagination, Navigation]}
           className="w-full h-full sm:h-full"
         >
           {/* {isLoading ? <div>Loading...</div> : <div>data</div>} */}
@@ -57,6 +64,7 @@ const MovieSlider = ({ urlCategory }) => {
                 title={item.title}
                 overview={item.overview}
                 release_date={item.release_date}
+                genre_ids={item.genre_ids}
               />
             </SwiperSlide>
           ))}
