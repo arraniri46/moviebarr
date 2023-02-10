@@ -20,7 +20,7 @@ const SearchPage = () => {
     return <div className="mt-16 h-screen"></div>;
   } else if (data === undefined) {
     return (
-      <div className="w-1/6">
+      <div className="w-1/6 h-screen">
         <SkeletonList />
       </div>
     );
@@ -30,7 +30,7 @@ const SearchPage = () => {
     return (
       <>
         {isLoading && (
-          <div className="flex flex-wrap">
+          <div className="flex flex-wrap h-screen">
             <div className="w-1/6">
               <SkeletonList />
             </div>

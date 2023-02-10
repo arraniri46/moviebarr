@@ -1,7 +1,7 @@
 import { create } from "zustand";
 
 export const useSearchStore = create((set) => ({
-  queryString: "avenger",
+  queryString: null,
   isSearch: false,
   setIsSearch: () => set({ isSearch: true }),
   setQueryString: (query) => set({ queryString: query }),
