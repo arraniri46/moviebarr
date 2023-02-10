@@ -11,7 +11,7 @@ const Header = () => {
           <div className="flex w-full justify-between ">
             <a href="/" className="flex w-max items-center">
               <img className="h-9" src="./images/logo.png" alt="logo" />
-              <h1 className="text-lg sm:text-2xl font-semibold">upibarr</h1>
+              <h1 className="text-lg sm:text-2xl font-semibold">upibang</h1>
             </a>
           </div>
 
