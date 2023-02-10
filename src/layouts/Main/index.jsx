@@ -1,6 +1,6 @@
 import HomePage from "../../pages/HomePage";
 import SearchPage from "../../pages/SearchPage";
-import { useSearchStore } from "../../reducer/store";
+import { useSearchStore } from "../../store/store";
 
 const Main = () => {
   const { isSearch } = useSearchStore();

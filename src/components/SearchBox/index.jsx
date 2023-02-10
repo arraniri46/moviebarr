@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { useSearchStore } from "../../reducer/store";
+import { useSearchStore } from "../../store/store";
 
 const SearchBox = () => {
   const searchRef = useRef();

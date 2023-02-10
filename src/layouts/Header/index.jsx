@@ -7,7 +7,7 @@ const Header = () => {
   return (
     <>
       <header className="flex w-full">
-        <nav className="flex w-full h-20 py-2 px-2 sm:px-8 bg-primary text-terniary items-center justify-between fixed z-20 shadow-lg border-b border-secondary">
+        <nav className="flex w-full h-16 py-2 px-2 sm:px-8 bg-primary text-terniary items-center justify-between fixed z-20 shadow-xl">
           <div className="flex w-full justify-between ">
             <a href="/" className="flex w-max items-center">
               <img className="h-9" src="./images/logo.png" alt="logo" />

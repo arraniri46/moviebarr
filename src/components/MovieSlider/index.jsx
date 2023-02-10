@@ -60,6 +60,7 @@ const MovieSlider = ({ urlCategory }) => {
           {data.map((item, index) => (
             <SwiperSlide key={index} className="shadow-2xl">
               <Card
+                id={item.id}
                 poster={item.poster_path}
                 title={item.title}
                 overview={item.overview}

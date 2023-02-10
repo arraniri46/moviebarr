@@ -1,9 +1,16 @@
+import { useState } from "react";
+import MovieDetail from "../../components/MovieDetail";
 import MovieSlider from "../../components/MovieSlider";
 
 const HomePage = () => {
+  const [open, setOpen] = useState(false);
+
   return (
     <>
       <div className="flex flex-col justify-center bg-primary text-terniary">
+        <section>
+          <MovieDetail open={open} />
+        </section>
         <section className="flex h-screen">
           {/* <img
             src="./images/movie-cover.jpg"

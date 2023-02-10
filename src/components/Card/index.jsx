@@ -1,19 +1,29 @@
+import { useState } from "react";
 import genres from "../../data/genres";
+import { useDetailStore } from "../../store/store";
 
-const Card = ({
-  title,
-  overview,
-  release_date,
-  poster,
-  vote_avg,
-  genre_ids,
-}) => {
+const Card = (props) => {
+  const { id, title, overview, release_date, poster, vote_avg, genre_ids } =
+    props;
   const genre = genres;
+
+  // const [isOpen, setIsOpen] = useState(false);
+
+  const detailStore = useDetailStore();
+
+  const getDetail = (e) => {
+    e.preventDefault();
+
+    detailStore.setIdMovie(id);
+    detailStore.setIdCredits(id);
+    detailStore.setIsOpen(true);
+    // console.log(id);
+  };
 
   return (
     <>
       <div className="w-full h-full rounded-lg shadow-lg">
-        <a href="#">
+        <a href="#" onClick={(e) => getDetail(e)}>
           <img
             className="w-full h-full"
             src={`https://image.tmdb.org/t/p/original/${poster}`}

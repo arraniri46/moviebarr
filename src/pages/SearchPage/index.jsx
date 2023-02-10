@@ -2,22 +2,45 @@ import { useEffect, useState } from "react";
 import Card from "../../components/Card";
 import NotFound from "../../components/NotFound";
 import useFetch from "../../hooks/useFetch";
-import { useSearchStore } from "../../reducer/store";
+import { useSearchStore } from "../../store/store";
+import SkeletonList from "../../components/SkeletonList";
 
 const SearchPage = () => {
-  const searchQuery = useSearchStore((state) => state.queryString);
+  const { queryString } = useSearchStore();
 
   const { data, isLoading } = useFetch(
-    `https://api.themoviedb.org/3/search/movie?api_key=dedeaec4a6b9b494f0a2b358a2bb2492&query=${searchQuery}&page=1`
+    `https://api.themoviedb.org/3/search/movie?api_key=dedeaec4a6b9b494f0a2b358a2bb2492&query=${queryString}&page=1`
   );
 
-  if (data === undefined) {
-    return <div className="mt-16">Loading</div>;
+  if (queryString === null) {
+    return <div className="mt-16 h-screen"></div>;
   } else if (data.length === 0) {
     return <NotFound />;
   } else
     return (
       <>
+        {isLoading && (
+          <div className="flex flex-wrap">
+            <div className="w-1/6">
+              <SkeletonList />
+            </div>
+            <div className="w-1/6">
+              <SkeletonList />
+            </div>
+            <div className="w-1/6">
+              <SkeletonList />
+            </div>
+            <div className="w-1/6">
+              <SkeletonList />
+            </div>
+            <div className="w-1/6">
+              <SkeletonList />
+            </div>
+            <div className="w-1/6">
+              <SkeletonList />
+            </div>
+          </div>
+        )}
         <div className="flex flex-col min-h-screen mt-16 mx-auto px-12 py-6">
           <span className="flex w-max items-center text-terniary">
             <a href="">
@@ -32,7 +55,7 @@ const SearchPage = () => {
             <p className="text-3xl font-semibold ml-6">Result</p>
           </span>
 
-          <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-x-6 w-full h-full mt-6">
+          <div className="grid grid-cols-1 sm:grid-cols-4 md:grid-cols-6 gap-x-6 w-full h-full mt-6">
             {data.map((item, index) => (
               <div
                 key={index}
