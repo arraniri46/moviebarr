@@ -12,12 +12,12 @@ import { useState } from "react";
 
 import Skeleton from "../SkeletonList";
 
-const API_KEY = "dedeaec4a6b9b494f0a2b358a2bb2492";
-
 const MovieSlider = ({ urlCategory }) => {
   const [dataMovie, setDataMovie] = useState([]);
 
-  const { data, isLoading } = useFetch(`${urlCategory}${API_KEY}`);
+  const { data, isLoading } = useFetch(
+    `${urlCategory}${import.meta.env.VITE_API_KEY}`
+  );
 
   if (data === undefined) {
     return (

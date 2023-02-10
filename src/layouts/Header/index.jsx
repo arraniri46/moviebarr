@@ -23,7 +23,7 @@ const Header = () => {
           >
             <ul className="flex flex-col sm:flex-row text-center gap-y-4 sm:gap-x-14 mt-8 sm:mt-0 sm:mr-10 items-start sm:items-center">
               <a href="/#now-playing">
-                <li className="text-lg font-semibold hover:underline hover:text-secondary text-primary sm:text-terniary w-max ">
+                <li className="text-lg font-semibold hover:underline hover:text-secondary text-primary sm:text-terniary w-max">
                   Now Playing
                 </li>
               </a>

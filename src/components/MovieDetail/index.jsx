@@ -11,8 +11,12 @@ const MovieDetail = () => {
   const [dataDetailMovie, setDataDetailMovie] = useState();
   const [dataCredits, setDataCredits] = useState();
 
-  let url = `https://api.themoviedb.org/3/movie/${idMovie}?api_key=dedeaec4a6b9b494f0a2b358a2bb2492&language=en-US`;
-  let urlCredits = `https://api.themoviedb.org/3/movie/${idMovie}/credits?api_key=dedeaec4a6b9b494f0a2b358a2bb2492&language=en-US`;
+  let url = `https://api.themoviedb.org/3/movie/${idMovie}?api_key=${
+    import.meta.env.VITE_API_KEY
+  }&language=en-US`;
+  let urlCredits = `https://api.themoviedb.org/3/movie/${idMovie}/credits?api_key=${
+    import.meta.env.VITE_API_KEY
+  }&language=en-US`;
 
   useEffect(() => {
     function fetchDetailMovie() {
@@ -50,8 +54,8 @@ const MovieDetail = () => {
           className="relative z-50"
           onClose={() => {
             setIsOpen(false);
-            setDataDetailMovie(undefined);
-            setDataCredits(undefined);
+            // setDataDetailMovie(undefined);
+            // setDataCredits(undefined);
           }}
         >
           <Transition.Child
@@ -63,7 +67,7 @@ const MovieDetail = () => {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="fixed inset-0 bg-black bg-opacity-25" />
+            <div className="fixed inset-0 bg-black bg-opacity-80" />
           </Transition.Child>
 
           <div className="fixed inset-0 overflow-y-auto">
@@ -77,7 +81,7 @@ const MovieDetail = () => {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="w-full h-full container transform overflow-hidden rounded-2xl bg-primary text-left align-middle shadow-xl transition-all">
+                <Dialog.Panel className="w-full h-screen sm:h-full container transform overflow-hidden rounded-2xl bg-primary text-left align-middle shadow-xl transition-all">
                   <div className="mt-2">
                     <img
                       src={`https://image.tmdb.org/t/p/original/${dataDetailMovie.backdrop_path}`}
@@ -89,34 +93,35 @@ const MovieDetail = () => {
                     <div className="flex flex-col w-full absolute top-0 mt-32 px-12">
                       <Dialog.Title
                         as="h3"
-                        className="text-4xl font-semibold leading-6 text-terniary"
+                        className="text-2xl sm:text-4xl font-semibold leading-6 text-terniary"
                       >
                         {dataDetailMovie.title}
                       </Dialog.Title>
                       <p className="max-w-96 text-base text-secondary mt-2">
                         {dataDetailMovie.release_date}
                       </p>
-                      <p className="max-w-96 text-xl text-secondary">
+                      <p className="max-w-96 text-base sm:text-xl text-secondary">
                         {dataDetailMovie.genres.map(
                           (genre) => genre.name + " "
                         )}
                       </p>
-                      <div className="w-3/6 font-bold text-secondary mt-6">
+                      <div className="w-full sm:w-3/6 font-bold text-secondary mt-6 ">
                         <p>Overview:</p>
-                        <p className="text-lg text-terniary text-justify ">
+                        <p className="text-base sm:text-lg text-terniary text-justify ">
                           {dataDetailMovie.overview}
                         </p>
                       </div>
-                      <p className="w-full font-bold text-secondary mt-12">
+
+                      <p className="w-full font-bold text-secondary mt-12 hidden sm:flex">
                         Cast:
                       </p>
-                      <div className="flex text-terniary gap-x-2">
+                      <div className="text-terniary gap-x-2 hidden sm:flex">
                         {dataCredits.slice(0, 8).map((credit, index) => (
                           <div
                             key={index}
-                            className="flex flex-col w-max h-68 shadow-md shadow-secondary"
+                            className="flex flex-col w-20 sm:w-max h-28 shadow-md shadow-secondary"
                           >
-                            <div className="w-32">
+                            <div className="w-20 sm:w-32">
                               <img
                                 src={`https://image.tmdb.org/t/p/original/${credit.profile_path}`}
                                 alt="profile-picture"
@@ -124,8 +129,10 @@ const MovieDetail = () => {
                               />
                             </div>
                             <div className="flex flex-col w-32">
-                              <p className="font-semibold">{credit.name}</p>
-                              <p className="text-sm font-light text-secondary">
+                              <p className="font-semibold text-xs sm:text-base">
+                                {credit.name}
+                              </p>
+                              <p className="text-xs sm:text-sm font-light text-secondary">
                                 as {credit.character}
                               </p>
                             </div>
@@ -139,11 +146,11 @@ const MovieDetail = () => {
                   <div className="mt-4 absolute z-20 top-0 right-0 mr-2">
                     <button
                       type="button"
-                      className="inline-flex justify-center rounded-md border border-secondary text-secondary bg-primary px-4 py-2 text-base font-bold hover:bg-secondary hover:text-primary"
+                      className="inline-flex justify-center rounded-lg border border-secondary text-secondary bg-primary px-4 py-2 text-base font-bold hover:bg-secondary hover:text-primary"
                       onClick={() => {
                         setIsOpen(false);
-                        setDataDetailMovie(undefined);
-                        setDataCredits(undefined);
+                        // setDataDetailMovie(undefined);
+                        // setDataCredits(undefined);
                       }}
                     >
                       X

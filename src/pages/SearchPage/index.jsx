@@ -4,18 +4,26 @@ import NotFound from "../../components/NotFound";
 import useFetch from "../../hooks/useFetch";
 import { useSearchStore } from "../../store/store";
 import SkeletonList from "../../components/SkeletonList";
+import MovieDetail from "../../components/MovieDetail";
 
 const SearchPage = () => {
+  const [open, setOpen] = useState(false);
   const searchQuery = useSearchStore((state) => state.queryString);
 
   const { data, isLoading } = useFetch(
-    `https://api.themoviedb.org/3/search/movie?api_key=dedeaec4a6b9b494f0a2b358a2bb2492&query=${searchQuery}&page=1`
+    `https://api.themoviedb.org/3/search/movie?api_key=${
+      import.meta.env.VITE_API_KEY
+    }&query=${searchQuery}&page=1`
   );
 
   if (searchQuery === null) {
     return <div className="mt-16 h-screen"></div>;
   } else if (data === undefined) {
-    return <NotFound />;
+    return (
+      <div className="w-1/6">
+        <SkeletonList />
+      </div>
+    );
   } else if (data.length === 0) {
     return <NotFound />;
   } else
@@ -23,21 +31,6 @@ const SearchPage = () => {
       <>
         {isLoading && (
           <div className="flex flex-wrap">
-            <div className="w-1/6">
-              <SkeletonList />
-            </div>
-            <div className="w-1/6">
-              <SkeletonList />
-            </div>
-            <div className="w-1/6">
-              <SkeletonList />
-            </div>
-            <div className="w-1/6">
-              <SkeletonList />
-            </div>
-            <div className="w-1/6">
-              <SkeletonList />
-            </div>
             <div className="w-1/6">
               <SkeletonList />
             </div>
@@ -55,6 +48,9 @@ const SearchPage = () => {
               />
             </a>
             <p className="text-3xl font-semibold ml-6">Result</p>
+            <section>
+              <MovieDetail open={open} />
+            </section>
           </span>
 
           <div className="grid grid-cols-1 sm:grid-cols-4 md:grid-cols-6 gap-x-6 w-full h-full mt-6">
@@ -64,6 +60,7 @@ const SearchPage = () => {
                 className="flex w-60 h-72 md:w-72 md:h-96 bg-primary mb-48"
               >
                 <Card
+                  id={item.id}
                   poster={item.poster_path}
                   title={item.title}
                   overview={item.overview}

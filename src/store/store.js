@@ -8,8 +8,8 @@ export const useSearchStore = create((set) => ({
 }));
 
 export const useDetailStore = create((set) => ({
-  idMovie: null,
-  idCredits: null,
+  idMovie: 278,
+  idCredits: 278,
   isOpen: false,
   setIdMovie: (id) => set({ idMovie: id }),
   setIdCredits: (id) => set({ idCredits: id }),
