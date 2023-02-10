@@ -6,14 +6,16 @@ import { useSearchStore } from "../../store/store";
 import SkeletonList from "../../components/SkeletonList";
 
 const SearchPage = () => {
-  const { queryString } = useSearchStore();
+  const searchQuery = useSearchStore((state) => state.queryString);
 
   const { data, isLoading } = useFetch(
-    `https://api.themoviedb.org/3/search/movie?api_key=dedeaec4a6b9b494f0a2b358a2bb2492&query=${queryString}&page=1`
+    `https://api.themoviedb.org/3/search/movie?api_key=dedeaec4a6b9b494f0a2b358a2bb2492&query=${searchQuery}&page=1`
   );
 
-  if (queryString === null) {
+  if (searchQuery === null) {
     return <div className="mt-16 h-screen"></div>;
+  } else if (data === undefined) {
+    return <NotFound />;
   } else if (data.length === 0) {
     return <NotFound />;
   } else

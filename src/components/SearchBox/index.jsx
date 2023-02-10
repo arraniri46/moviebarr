@@ -15,7 +15,6 @@ const SearchBox = () => {
     searchStore.setQueryString(searchRef.current.value);
     // setSearchParams(searchRef.current.value);
   };
-  // console.log("SearchBox :", searchStore.queryString);
 
   return (
     <>

@@ -5,7 +5,6 @@ import { Fragment, useEffect, useState } from "react";
 import axios from "axios";
 
 import Skeleton from "../SkeletonList";
-import CastSlider from "../CastSlider";
 
 const MovieDetail = () => {
   const { idMovie, isOpen, setIsOpen } = useDetailStore();
@@ -16,17 +15,25 @@ const MovieDetail = () => {
   let urlCredits = `https://api.themoviedb.org/3/movie/${idMovie}/credits?api_key=dedeaec4a6b9b494f0a2b358a2bb2492&language=en-US`;
 
   useEffect(() => {
-    axios
-      .get(url)
-      .then((res) => setDataDetailMovie(res.data))
-      .catch((err) => console.log(err));
+    function fetchDetailMovie() {
+      axios
+        .get(url)
+        .then((res) => setDataDetailMovie(res.data))
+        .catch((err) => console.log(err.message));
+    }
+
+    fetchDetailMovie();
   }, [url]);
 
   useEffect(() => {
-    axios
-      .get(urlCredits)
-      .then((res) => setDataCredits(res.data.cast))
-      .catch((err) => console.log(err));
+    function fetchCredits() {
+      axios
+        .get(urlCredits)
+        .then((res) => setDataCredits(res.data.cast))
+        .catch((err) => console.log(err.message));
+    }
+
+    fetchCredits();
   }, [urlCredits]);
 
   // console.log(dataDetailMovie);
